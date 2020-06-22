@@ -31,7 +31,19 @@ class SecondViewController: FormViewController {
         
         form +++ Section("Section 2")
             <<< ButtonRow() { (row) in
-                row.title = "Button 1"
+                row.title = "Button"
+            }
+            .onCellSelection { (cell, row) in
+                guard !row.isDisabled else { return }
+                
+                let alertController = UIAlertController(title: "Pressed",
+                                                        message: "The button was pressed",
+                                                        preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Cancel",
+                                                        style: .cancel))
+                
+                self.present(alertController, animated: true)
             }
             <<< LabelRow() { (row) in
                 row.title = "Label"
